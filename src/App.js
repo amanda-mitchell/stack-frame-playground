@@ -9,7 +9,19 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Edit{' '}
+            <button
+              onClick={() =>
+                fetch(
+                  `/__open-stack-frame-in-editor?fileName=${encodeURIComponent(
+                    'src/App.js'
+                  )}`
+                )
+              }
+            >
+              <code>src/App.js</code>
+            </button>{' '}
+            and save to reload.
           </p>
           <a
             className="App-link"
