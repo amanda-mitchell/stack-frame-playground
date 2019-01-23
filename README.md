@@ -1,68 +1,45 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Purpose
 
-In the project directory, you can run:
+This app demonstrates some inconsistencies in how react-dev-utils' `launchEditor` works with Visual Studio Code on Mac.
 
-### `npm start`
+## Summary
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+If Visual Studio Code is opened from within the repo, and `yarn start` is run from within VS Code, opening a relative path works. In all other permutations that I've tested, it produces a confusing failure mode. (an empty document in an unexpected location)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Scenarios
 
-### `npm test`
+All of these assume that you have first cloned the repo and run `yarn` in it.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In each of the broken scenarios, a new document (and sometimes a new workspace) is opened called `src/App.js`
 
-### `npm run build`
+### Happy Path
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `cd` into the repo
+- run `code .`
+- open VS Code's terminal
+- run `yarn start` in VS Code's terminal
+- click the `src/App.js` button in the browser
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Broken Scenario 1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- close all VS Code workspaces
+- `cd` into the repo
+- run `yarn start`
+- click the button in the browser
 
-### `npm run eject`
+### Broken Scenario 2
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `cd` into the repo
+- run `code .`
+- from the original terminal, run `yarn start`
+- click the button in the browser
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Broken Scenario 3
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- `cd` to the parent directory of the repo.
+- run `code stack-frame-playground`
+- open VS Code's terminal
+- run `yarn start` in VS Code's terminal
+- click the button in the browser
